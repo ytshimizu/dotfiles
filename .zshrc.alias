@@ -1,0 +1,15 @@
+# Vim
+alias vi='vim'
+
+# Ruby
+alias be='bundle exec'
+alias -g RET="RAILS_ENV=test"
+alias -g RED="RAILS_ENV=development"
+alias -g REP="RAILS_ENV=production"
+
+# ls
+alias la="ls -a"
+alias lf="ls -F"
+alias ll="ls -l"
+alias lla="ls -la"
+

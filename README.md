@@ -7,3 +7,6 @@
 * .tmux.conf
 * .vimrc
 * .zshrc
+
+## install
+bash setup.sh

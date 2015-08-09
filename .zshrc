@@ -53,11 +53,17 @@ plugins=(git themes osx ruby gem)
 
 # User configuration
 
-export PATH="/Users/shimizu/.rbenv/shims:/usr/local/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="$HOME/.gem/ruby/2.0.0/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
+export PATH="$HOME/.rbenv/shims:/usr/local/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# Ruby
+export PATH="$HOME/.rbenv/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export PATH="$HOME/.gem/ruby/2.0.0/bin:$PATH"
+# PHP
+export PATH=$PATH:/Applications/MAMP/bin/php/php5.6.10/bin
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/dotfiles/.zshrc.alias
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -83,4 +89,4 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias be='bundle exec'
+
