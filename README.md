@@ -1,5 +1,6 @@
 #dotfiles
 
+## files
 * .atom
 * .gitconfg
 * .gitignore
