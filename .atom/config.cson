@@ -20,26 +20,6 @@
     softWrap: true
     fontSize: 15
   linter: {}
-  "syntax-settings":
-    source:
-      ruby:
-        editorSettings:
-          tabLength: 2
-        editorViewSettings:
-          showInvisibles: true
-          softWrap: false
-          showIndentGuide: false
-        gutterViewSettings:
-          showLineNumbers: true
-      php:
-        editorSettings:
-          tabLength: 4
-        editorViewSettings:
-          showInvisibles: true
-          softWrap: false
-          showIndentGuide: false
-        gutterViewSettings:
-          showLineNumbers: true
   "view-tail-large-files": {}
   "atom-beautify":
     _analyticsUserId: "69de1a6f-3bd1-48da-a97e-a0695879ec5e"

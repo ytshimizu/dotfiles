@@ -1,1 +1,5 @@
-{}
+rails_sample:
+  title: "rails_sample"
+  paths: [
+    "/Users/shimizu/Repository/rails_sample"
+  ]
