@@ -3,3 +3,13 @@ rails_sample:
   paths: [
     "/Users/shimizu/Repository/rails_sample"
   ]
+angular2_sample:
+  title: "angular2_sample"
+  paths: [
+    "/Users/shimizu/Repository/angular2_sample"
+  ]
+bot_sample:
+  title: "bot_sample"
+  paths: [
+    "/Users/shimizu/Repository/bot_sample"
+  ]
