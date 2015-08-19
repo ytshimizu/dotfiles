@@ -26,6 +26,7 @@
   minimap:
     plugins:
       "minimap-autohide": true
+      "git-diff": true
   "highlight-line":
     enableBackgroundColor: false
   atomatigit:
@@ -49,6 +50,8 @@
   "merge-conflicts": {}
   preview:
     _analyticsUserId: "72d12bc7-4828-4e73-ae7b-ef4a17b178ac"
+  "japanese-wrap":
+    characterWidth: {}
 ".blade.html.php.text":
   editor:
     softWrap: false
