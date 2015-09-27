@@ -10,6 +10,7 @@
       "atom-material-ui"
       "atom-material-syntax"
     ]
+    audioBeep: false
   "exception-reporting":
     userId: "d8362a48-3991-12bb-05e8-9a218f26f25f"
   welcome:
@@ -17,7 +18,6 @@
   editor:
     invisibles: {}
     showInvisibles: true
-    softWrap: true
     fontSize: 15
   linter: {}
   "view-tail-large-files": {}
@@ -26,6 +26,7 @@
   minimap:
     plugins:
       "minimap-autohide": true
+      "git-diff": true
   "highlight-line":
     enableBackgroundColor: false
   atomatigit:
@@ -47,6 +48,10 @@
   emmet: {}
   pigments: {}
   "merge-conflicts": {}
+  preview:
+    _analyticsUserId: "72d12bc7-4828-4e73-ae7b-ef4a17b178ac"
+  "japanese-wrap":
+    characterWidth: {}
 ".blade.html.php.text":
   editor:
     softWrap: false
