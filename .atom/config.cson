@@ -18,7 +18,7 @@
   editor:
     invisibles: {}
     showInvisibles: true
-    fontSize: 15
+    softWrap: true
   linter: {}
   "view-tail-large-files": {}
   "atom-beautify":
@@ -27,6 +27,7 @@
     plugins:
       "minimap-autohide": true
       "git-diff": true
+      bookmarks: true
   "highlight-line":
     enableBackgroundColor: false
   atomatigit:
@@ -52,6 +53,8 @@
     _analyticsUserId: "72d12bc7-4828-4e73-ae7b-ef4a17b178ac"
   "japanese-wrap":
     characterWidth: {}
+  "vim-mode": {}
+  jumpy: {}
 ".blade.html.php.text":
   editor:
     softWrap: false
