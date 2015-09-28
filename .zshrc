@@ -61,6 +61,8 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.gem/ruby/2.0.0/bin:$PATH"
 # PHP
 export PATH=$PATH:/Applications/MAMP/bin/php/php5.6.10/bin
+# Node
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/.zshrc.alias
