@@ -1,61 +1,20 @@
 "*":
+  "save-session":
+    dataSaveFolder: "~/dotfiles/.atom/packages/save-session/projects"
+  "exception-reporting":
+    userId: "9ab92843-c95b-722d-94bb-29c36cb53f43"
+  minimap:
+    plugins:
+      bookmarks: true
+      "git-diff": true
+  welcome:
+    showOnStartup: false
   core:
-    disabledPackages: [
-      "git-log"
-      "Remote-FTP"
-      "syntax-settings"
-    ]
-    excludeVcsIgnoredPaths: false
     themes: [
       "atom-material-ui"
       "atom-material-syntax"
     ]
-    audioBeep: false
-  "exception-reporting":
-    userId: "d8362a48-3991-12bb-05e8-9a218f26f25f"
-  welcome:
-    showOnStartup: false
   editor:
     invisibles: {}
+    fontSize: 15
     showInvisibles: true
-    softWrap: true
-  linter: {}
-  "view-tail-large-files": {}
-  "atom-beautify":
-    _analyticsUserId: "69de1a6f-3bd1-48da-a97e-a0695879ec5e"
-  minimap:
-    plugins:
-      "minimap-autohide": true
-      "git-diff": true
-      bookmarks: true
-  "highlight-line":
-    enableBackgroundColor: false
-  atomatigit:
-    show_on_startup: true
-  "git-log": {}
-  "git-plus": {}
-  "save-session":
-    dataSaveFolder: "/Users/shimizu/.atom/packages/save-session/projects"
-    projects: []
-    windowX: 0
-    windowY: 23
-    windowWidth: 1920
-    windowHeight: 1053
-    fullScreen: false
-  term2:
-    colors: {}
-  "isotope-ui": {}
-  "tree-view": {}
-  emmet: {}
-  pigments: {}
-  "merge-conflicts": {}
-  preview:
-    _analyticsUserId: "72d12bc7-4828-4e73-ae7b-ef4a17b178ac"
-  "japanese-wrap":
-    characterWidth: {}
-  "vim-mode": {}
-  jumpy: {}
-".blade.html.php.text":
-  editor:
-    softWrap: false
-    tabLength: 2
