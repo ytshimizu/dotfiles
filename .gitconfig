@@ -5,7 +5,7 @@
   name = Yuta Shimizu
   email = shimizu0391@gmail.com
 [core]
-	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
   editor = /usr/bin/vim
 	quotepath = false
 [difftool "sourcetree"]
