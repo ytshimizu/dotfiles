@@ -14,7 +14,10 @@
       "atom-material-ui"
       "atom-material-syntax"
     ]
+    audioBeep: false
   editor:
     invisibles: {}
-    fontSize: 15
     showInvisibles: true
+    fontSize: 15
+  "atom-beautify":
+    _analyticsUserId: "91b842f3-d84b-46c2-b503-60e30680c828"
