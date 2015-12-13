@@ -16,5 +16,6 @@
     ]
   editor:
     invisibles: {}
-    fontSize: 15
     showInvisibles: true
+    fontSize: 15
+    showIndentGuide: true
