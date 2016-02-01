@@ -63,13 +63,17 @@ export PATH="$HOME/.gem/ruby/2.0.0/bin:$PATH"
 export PATH=$PATH:/Applications/MAMP/bin/php/php5.6.10/bin
 # Node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
-# Python
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 # Go
 export GOPATH=$HOME/go/third-party:$HOME/go/project
 export PATH=$HOME/go/third-party/bin:$HOME/go/project/bin:$PATH
+# Java
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+# postgres
+export PGDATA=/usr/local/var/postgres
+# CS CLI
+export CS_HOME=$HOME/cloud-search-tools
+export PATH=$PATH:$CS_HOME/bin
+export CS_ENDPOINT=cloudsearch.ap-northeast-1.amazonaws.com
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/.zshrc.alias
