@@ -54,27 +54,8 @@ plugins=(git github themes osx atom node npm bower ruby gem rails vagrant histor
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH="$HOME/.rbenv/shims:/usr/local/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-# Ruby
-export PATH="$HOME/.rbenv/bin:$PATH"
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export PATH="$HOME/.gem/ruby/2.0.0/bin:$PATH"
-# PHP
-export PATH=$PATH:/Applications/MAMP/bin/php/php5.6.10/bin
-# Node
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-# Go
-export GOPATH=$HOME/go/third-party:$HOME/go/project
-export PATH=$HOME/go/third-party/bin:$HOME/go/project/bin:$PATH
-# Java
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-# postgres
-export PGDATA=/usr/local/var/postgres
-# CS CLI
-export CS_HOME=$HOME/cloud-search-tools
-export PATH=$PATH:$CS_HOME/bin
-export CS_ENDPOINT=cloudsearch.ap-northeast-1.amazonaws.com
 
+source $HOME/dotfiles/.zshrc.path
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/.zshrc.alias
 
