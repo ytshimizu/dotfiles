@@ -8,7 +8,7 @@
     ]
     themes: [
       "atom-material-ui"
-      "an-old-hope-syntax"
+      "atom-material-syntax-dark"
     ]
   editor:
     fontSize: 15
@@ -21,6 +21,7 @@
     plugins:
       bookmarks: true
       "git-diff": true
+      "git-diffDecorationsZIndex": 0
   "save-session":
     dataSaveFolder: "~/dotfiles/.atom/packages/save-session/projects"
   "vim-mode-plus": {}
