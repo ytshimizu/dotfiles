@@ -2,8 +2,8 @@
 # .gitconfig
 #
 [user]
-  name = Yuta Shimizu
-  email = shimizu0391@gmail.com
+  name = shimizu
+  email = shimizu@fenrir.co.jp
 [core]
   excludesfile = ~/.gitignore
   editor = /usr/bin/vim
