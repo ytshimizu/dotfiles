@@ -18,3 +18,8 @@ js_library_demo:
   paths: [
     "/Users/shimizu/Repository/js_library_demo"
   ]
+"openstreetmap-website":
+  title: "openstreetmap-website"
+  paths: [
+    "/Users/shimizu/Repository/openstreetmap-website"
+  ]
