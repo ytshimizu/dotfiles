@@ -6,7 +6,7 @@
   email = l.bird0206@gmail.com
 [core]
   excludesfile = ~/.gitignore
-  editor = /usr/bin/vim
+  editor = /usr/local/bin/vim
 	quotepath = false
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
