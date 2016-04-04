@@ -3,7 +3,7 @@
 #
 [user]
   name = shimizu
-  email = shimizu@fenrir.co.jp
+  email = l.bird0206@gmail.com
 [core]
   excludesfile = ~/.gitignore
   editor = /usr/local/bin/vim
