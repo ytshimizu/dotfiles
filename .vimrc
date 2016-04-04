@@ -1,43 +1,39 @@
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+if &compatible
+  set nocompatible
 endif
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+call dein#begin(expand('~/.vim/dein'))
 
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim', {
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/vimproc.vim', {
+    \ 'build': {
+    \     'windows': 'tools\\update-dll-mingw',
+    \     'cygwin': 'make -f make_cygwin.mak',
+    \     'mac': 'make -f make_mac.mak',
+    \     'linux': 'make',
+    \     'unix': 'gmake',
+    \    },
+    \ })
+call dein#add('Shougo/neocomplete.vim')
+call dein#add('Shougo/neosnippet')
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/neomru.vim', {
   \ 'depends' : 'Shougo/unite.vim'
-  \ }
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'LeafCage/yankround.vim'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-  \     'windows' : 'tools\\update-dll-mingw',
-  \     'cygwin' : 'make -f make_cygwin.mak',
-  \     'mac' : 'make -f make_mac.mak',
-  \     'linux' : 'make',
-  \     'unix' : 'gmake',
-  \    },
-  \ }
-NeoBundleLazy 'junegunn/vim-easy-align', {
+  \ })
+call dein#add('scrooloose/nerdcommenter')
+call dein#add('scrooloose/nerdtree')
+call dein#add('Townk/vim-autoclose')
+call dein#add('LeafCage/yankround.vim')
+call dein#add('Lokaltog/vim-easymotion')
+call dein#add('nanotech/jellybeans.vim')
+call dein#add('tpope/vim-endwise', {
+  \ 'autoload' : { 'insert' : 1,}})
+call dein#add('junegunn/vim-easy-align', {
   \ 'autoload': {
   \   'commands' : ['EasyAlign'],
   \   'mappings' : ['<Plug>(EasyAlign)'],
-  \ }}
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundleLazy 'tpope/vim-endwise', {
-  \ 'autoload' : { 'insert' : 1,}}
+  \ }})
 if has('lua')
   NeoBundleLazy 'Shougo/neocomplete.vim', {
     \ 'depends' : 'Shougo/vimproc',
@@ -45,14 +41,7 @@ if has('lua')
     \ }
 endif
 
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
+call dein#end()
 
 colorscheme jellybeans
 
