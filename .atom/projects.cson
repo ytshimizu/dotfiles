@@ -1,25 +1,20 @@
-rails_sample:
-  title: "rails_sample"
+ykk_wr_sv:
+  title: "YKK_WR_SV"
   paths: [
-    "/Users/shimizu/Repository/rails_sample"
+    "/Users/shimizu/Repository/YKK_WR_SV"
   ]
-angular2_sample:
-  title: "angular2_sample"
+newkba:
+  title: "NEWKBA"
   paths: [
-    "/Users/shimizu/Repository/angular2_sample"
+    "/Users/shimizu/Repository/NEWKBA"
   ]
-bot_sample:
-  title: "bot_sample"
+din_sv:
+  title: "DIN_SV"
   paths: [
-    "/Users/shimizu/Repository/bot_sample"
+    "/Users/shimizu/Repository/DIN_SV"
   ]
-js_library_demo:
-  title: "js_library_demo"
+komtraweb:
+  title: "KOMTRAWEB"
   paths: [
-    "/Users/shimizu/Repository/js_library_demo"
-  ]
-"openstreetmap-website":
-  title: "openstreetmap-website"
-  paths: [
-    "/Users/shimizu/Repository/openstreetmap-website"
+    "/Users/shimizu/Repository/KOMTRAWEB"
   ]
