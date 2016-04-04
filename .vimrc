@@ -24,6 +24,8 @@ call dein#add('Shougo/neomru.vim', {
 call dein#add('scrooloose/nerdcommenter')
 call dein#add('scrooloose/nerdtree')
 call dein#add('Townk/vim-autoclose')
+call dein#add('tomtom/tcomment_vim')
+call dein#add('nathanaelkane/vim-indent-guides')
 call dein#add('LeafCage/yankround.vim')
 call dein#add('Lokaltog/vim-easymotion')
 call dein#add('nanotech/jellybeans.vim')
@@ -143,4 +145,14 @@ let g:EasyMotion_startofline = 0
 let g:EasyMotion_keys = 'QZASDFGHJKL;'
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_enter_jump_first = 1
+" }}}
+
+" vim-indent-guide {{{
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_start_level=2
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
+let g:indent_guides_color_change_percent = 30
+let g:indent_guides_guide_size = 1
 " }}}
