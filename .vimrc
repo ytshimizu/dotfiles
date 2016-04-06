@@ -29,6 +29,7 @@ call dein#add('nathanaelkane/vim-indent-guides')
 call dein#add('LeafCage/yankround.vim')
 call dein#add('Lokaltog/vim-easymotion')
 call dein#add('nanotech/jellybeans.vim')
+call dein#add('kchmck/vim-coffee-script')
 call dein#add('tpope/vim-endwise', {
   \ 'autoload' : { 'insert' : 1,}})
 call dein#add('junegunn/vim-easy-align', {
@@ -93,8 +94,13 @@ set listchars=tab:>-,extends:<,trail:-
 
 syntax on
 
-" F9をNERDTreeToggle
-nmap <F9> :NERDTreeToggle
+" NERDTreeToggle
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+" vimにcoffeeファイルタイプを認識させる
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+" インデントを設定
+autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 
 " neocomplete {{{
 let g:neocomplete#enable_at_startup               = 1
