@@ -16,11 +16,24 @@ call dein#add('Shougo/vimproc.vim', {
     \    },
     \ })
 call dein#add('Shougo/neocomplete.vim')
-call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/neomru.vim', {
   \ 'depends' : 'Shougo/unite.vim'
   \ })
+call dein#add('Shougo/vimshell', {
+  \ 'depends' : 'Shougo/vimproc',
+  \ 'autoload' : {
+  \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
+  \                 'VimShellExecute', 'VimShellInteractive',
+  \                 'VimShellTerminal', 'VimShellPop'],
+  \   'mappings' : ['<Plug>(vimshell_switch)']
+  \ }})
+if has('lua')
+  NeoBundleLazy 'Shougo/neocomplete.vim', {
+    \ 'depends' : 'Shougo/vimproc',
+    \ 'autoload' : { 'insert' : 1,}
+    \ }
+endif
 call dein#add('scrooloose/nerdcommenter')
 call dein#add('scrooloose/nerdtree')
 call dein#add('Townk/vim-autoclose')
@@ -30,6 +43,7 @@ call dein#add('LeafCage/yankround.vim')
 call dein#add('Lokaltog/vim-easymotion')
 call dein#add('nanotech/jellybeans.vim')
 call dein#add('kchmck/vim-coffee-script')
+call dein#add('ConradIrwin/vim-bracketed-paste')
 call dein#add('tpope/vim-endwise', {
   \ 'autoload' : { 'insert' : 1,}})
 call dein#add('junegunn/vim-easy-align', {
@@ -37,12 +51,6 @@ call dein#add('junegunn/vim-easy-align', {
   \   'commands' : ['EasyAlign'],
   \   'mappings' : ['<Plug>(EasyAlign)'],
   \ }})
-if has('lua')
-  NeoBundleLazy 'Shougo/neocomplete.vim', {
-    \ 'depends' : 'Shougo/vimproc',
-    \ 'autoload' : { 'insert' : 1,}
-    \ }
-endif
 
 call dein#end()
 
@@ -60,9 +68,6 @@ set ignorecase "大文字/小文字の区別なく検索する
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
 set wrapscan "検索時に最後まで行ったら最初に戻る
 
-"--------------------
-" 基本的な設定
-"--------------------
 "自動再読み込み
 set autoread
 "新しい行のインデントを現在行と同じにする
@@ -90,17 +95,20 @@ set cursorline
 set wildmenu
 "TAB,EOFなどを可視化する
 set list
-set listchars=tab:>-,extends:<,trail:-
+set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set whichwrap=b,s,[,],<,>
+set backspace=indent,eol,start
 
 syntax on
 
-" NERDTreeToggle
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
+" 入力モードでのカーソル移動
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
 
-" vimにcoffeeファイルタイプを認識させる
-au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
-" インデントを設定
-autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
+" NERDTree
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 " neocomplete {{{
 let g:neocomplete#enable_at_startup               = 1
@@ -161,4 +169,9 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 let g:indent_guides_color_change_percent = 30
 let g:indent_guides_guide_size = 1
+" }}}
+
+" vimshell {{{
+nmap <silent> vs :<C-u>VimShell<CR>
+nmap <silent> vp :<C-u>VimShellPop<CR>
 " }}}

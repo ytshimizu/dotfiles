@@ -19,5 +19,4 @@ export CS_HOME=$HOME/cloud-search-tools
 export PATH=$PATH:$CS_HOME/bin
 export CS_ENDPOINT=cloudsearch.ap-northeast-1.amazonaws.com
 # nodebrew
-export PATH=/usr/local:$PATH
 export PATH=$HOME/.nodebrew/current/bin:$PATH
