@@ -10,12 +10,11 @@ call dein#add('Shougo/vimproc.vim', {
     \ 'build': {
     \     'windows': 'tools\\update-dll-mingw',
     \     'cygwin': 'make -f make_cygwin.mak',
-    \     'mac': 'make -f make_mac.mak',
+    \     'mac': 'make',
     \     'linux': 'make',
     \     'unix': 'gmake',
     \    },
     \ })
-call dein#add('Shougo/neocomplete.vim')
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/neomru.vim', {
   \ 'depends' : 'Shougo/unite.vim'
@@ -29,10 +28,10 @@ call dein#add('Shougo/vimshell', {
   \   'mappings' : ['<Plug>(vimshell_switch)']
   \ }})
 if has('lua')
-  NeoBundleLazy 'Shougo/neocomplete.vim', {
+  call dein#add('Shougo/neocomplete.vim', {
     \ 'depends' : 'Shougo/vimproc',
     \ 'autoload' : { 'insert' : 1,}
-    \ }
+    \ })
 endif
 call dein#add('scrooloose/nerdcommenter')
 call dein#add('scrooloose/nerdtree')
@@ -100,6 +99,13 @@ set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
 
 syntax on
+
+noremap j gj
+noremap k gk
+noremap <S-h>   ^
+noremap <S-j>   }
+noremap <S-k>   {
+noremap <S-l>   $
 
 " 入力モードでのカーソル移動
 inoremap <C-j> <Down>
