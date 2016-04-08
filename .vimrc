@@ -1,59 +1,60 @@
 if &compatible
   set nocompatible
 endif
-set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-call dein#begin(expand('~/.vim/dein'))
+" augroup PluginInstall
+"   autocmd!
+"   autocmd VimEnter * if dein#check_install() | call dein#install() | endif
+" augroup END
 
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/vimproc.vim', {
-    \ 'build': {
-    \     'windows': 'tools\\update-dll-mingw',
-    \     'cygwin': 'make -f make_cygwin.mak',
-    \     'mac': 'make',
-    \     'linux': 'make',
-    \     'unix': 'gmake',
-    \    },
+let s:plugin_dir = expand('~/.vim/dein/')
+let s:dein_dir = s:plugin_dir . 'repos/github.com/Shougo/dein.vim'
+execute 'set runtimepath+=' . s:dein_dir
+
+if dein#load_state(s:plugin_dir)
+  call dein#begin(s:plugin_dir)
+
+  call dein#add('Shougo/dein.vim')
+  call dein#add('Shougo/vimproc.vim', {
+        \ 'build': {
+        \     'mac': 'make -f make_mac.mak',
+        \     'linux': 'make',
+        \     'unix': 'gmake',
+        \    },
+        \ })
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/neomru.vim', {
+    \ 'depends' : 'Shougo/unite.vim'
     \ })
-call dein#add('Shougo/unite.vim')
-call dein#add('Shougo/neomru.vim', {
-  \ 'depends' : 'Shougo/unite.vim'
-  \ })
-call dein#add('Shougo/vimshell', {
-  \ 'depends' : 'Shougo/vimproc',
-  \ 'autoload' : {
-  \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
-  \                 'VimShellExecute', 'VimShellInteractive',
-  \                 'VimShellTerminal', 'VimShellPop'],
-  \   'mappings' : ['<Plug>(vimshell_switch)']
-  \ }})
-if has('lua')
-  call dein#add('Shougo/neocomplete.vim', {
-    \ 'depends' : 'Shougo/vimproc',
-    \ 'autoload' : { 'insert' : 1,}
-    \ })
+  if has('lua')
+    call dein#add('Shougo/neocomplete.vim', {
+      \ 'depends' : 'Shougo/vimproc',
+      \ 'autoload' : { 'insert' : 1,}
+      \ })
+  endif
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('Townk/vim-autoclose')
+  call dein#add('tomtom/tcomment_vim')
+  call dein#add('nathanaelkane/vim-indent-guides')
+  call dein#add('LeafCage/yankround.vim')
+  call dein#add('Lokaltog/vim-easymotion')
+  call dein#add('nanotech/jellybeans.vim')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('ConradIrwin/vim-bracketed-paste')
+  call dein#add('tpope/vim-endwise', {
+    \ 'autoload' : { 'insert' : 1,}})
+  call dein#add('junegunn/vim-easy-align', {
+    \ 'autoload': {
+    \   'commands' : ['EasyAlign'],
+    \   'mappings' : ['<Plug>(EasyAlign)'],
+    \ }})
+
+  call dein#end()
+  call dein#save_state()
 endif
-call dein#add('scrooloose/nerdcommenter')
-call dein#add('scrooloose/nerdtree')
-call dein#add('Townk/vim-autoclose')
-call dein#add('tomtom/tcomment_vim')
-call dein#add('nathanaelkane/vim-indent-guides')
-call dein#add('LeafCage/yankround.vim')
-call dein#add('Lokaltog/vim-easymotion')
-call dein#add('nanotech/jellybeans.vim')
-call dein#add('kchmck/vim-coffee-script')
-call dein#add('ConradIrwin/vim-bracketed-paste')
-call dein#add('tpope/vim-endwise', {
-  \ 'autoload' : { 'insert' : 1,}})
-call dein#add('junegunn/vim-easy-align', {
-  \ 'autoload': {
-  \   'commands' : ['EasyAlign'],
-  \   'mappings' : ['<Plug>(EasyAlign)'],
-  \ }})
 
-call dein#end()
-
-colorscheme jellybeans
+filetype plugin indent on
 
 "#####表示設定#####
 set title "編集中のファイル名を表示
@@ -100,6 +101,8 @@ set backspace=indent,eol,start
 
 syntax on
 
+colorscheme jellybeans
+
 noremap j gj
 noremap k gk
 noremap <S-h>   ^
@@ -115,6 +118,24 @@ inoremap <C-l> <Right>
 
 " NERDTree
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('py', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('rb', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
 " neocomplete {{{
 let g:neocomplete#enable_at_startup               = 1
