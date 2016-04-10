@@ -56,18 +56,24 @@ endif
 
 filetype plugin indent on
 
-"#####表示設定#####
-set title "編集中のファイル名を表示
+"編集中のファイル名を表示
+set title
+"バイナリファイルの非印字可能文字を16進数で表示
+set display=uhex
+" タブが対応する空白の数
 set tabstop=2
+" 自動で挿入されるインデントのスペース幅
 set shiftwidth=2
+" tab キーを押した時に挿入されるスペース量
 set softtabstop=0
-set smartindent "オートインデント
-
-""#####検索設定#####
-set ignorecase "大文字/小文字の区別なく検索する
-set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
-set wrapscan "検索時に最後まで行ったら最初に戻る
-
+"オートインデント
+set smartindent
+"大文字/小文字の区別なく検索する
+set ignorecase
+"検索文字列に大文字が含まれている場合は区別して検索する
+set smartcase
+"検索時に最後まで行ったら最初に戻る
+set wrapscan
 "自動再読み込み
 set autoread
 "新しい行のインデントを現在行と同じにする
@@ -84,39 +90,56 @@ set number
 set showmatch
 "新しい行を作った時に高度な自動インデントを行う
 set smarttab
+" カーソルの位置表示を行う
 set ruler
+"ステータスライン
 set laststatus=2
+set statusline=%<%f\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%4v\ %l/%L
+" 入力中のコマンドをステータスに表示する
 set showcmd
+" 検索結果文字列のハイライト
 set hlsearch
+" 全モードでマウスを有効化
 set mouse=a
+" バックアップをとらない
 set nobackup
+" スワップファイルを作成しない
 set noswapfile
+" 行を強調表示
 set cursorline
+" コマンドを補完
 set wildmenu
 "TAB,EOFなどを可視化する
 set list
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-set whichwrap=b,s,[,],<,>
+set listchars=tab:>-,trail:-,extends:>,precedes:<
+"カーソルを行頭、行末で止まらないようにする
+set whichwrap=b,s,h,l,[,],<,>
+"バックスペースにてインデントを削除
 set backspace=indent,eol,start
 
 syntax on
 
 colorscheme jellybeans
 
+" Keymap
 noremap j gj
 noremap k gk
 noremap <S-h>   ^
 noremap <S-j>   }
 noremap <S-k>   {
 noremap <S-l>   $
-
 " 入力モードでのカーソル移動
+inoremap <C-e> <END>
+inoremap <C-a> <HOME>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
+" ;でコマンド入力
+noremap ; :
+noremap : ;
 
-" NERDTree
+" NERDTree {{{
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -136,6 +159,7 @@ call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('rb', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+" }}}
 
 " neocomplete {{{
 let g:neocomplete#enable_at_startup               = 1
