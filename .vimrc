@@ -41,6 +41,10 @@ if dein#load_state(s:plugin_dir)
   call dein#add('nanotech/jellybeans.vim')
   call dein#add('kchmck/vim-coffee-script')
   call dein#add('ConradIrwin/vim-bracketed-paste')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('itchyny/landscape.vim')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-endwise', {
     \ 'autoload' : { 'insert' : 1,}})
   call dein#add('junegunn/vim-easy-align', {
@@ -54,6 +58,11 @@ if dein#load_state(s:plugin_dir)
 endif
 
 filetype plugin indent on
+
+".vimrcを開く: <Space>e.
+nnoremap <Space>e. :<C-u>edit $MYVIMRC<Enter>
+".vimrcを反映: <Space>s.
+nnoremap <Space>s. :<C-u>source $MYVIMRC<Enter>
 
 "編集中のファイル名を表示
 set title
@@ -89,15 +98,15 @@ set number
 set showmatch
 "新しい行を作った時に高度な自動インデントを行う
 set smarttab
+set autoindent
 " カーソルの位置表示を行う
 set ruler
 "ステータスライン
 set laststatus=2
-set statusline=%<%f\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%4v\ %l/%L
+" set statusline=%<%f\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%4v\ %l/%L
 " 入力中のコマンドをステータスに表示する
 set showcmd
-" 検索結果文字列のハイライト
-set hlsearch
+" 検索結果ch
 " 全モードでマウスを有効化
 set mouse=a
 " バックアップをとらない
@@ -115,10 +124,14 @@ set listchars=tab:>-,trail:-,extends:>,precedes:<
 set whichwrap=b,s,h,l,[,],<,>
 "バックスペースにてインデントを削除
 set backspace=indent,eol,start
+"クリップボードをOSと共有する
+set clipboard=unnamed,autoselect
 
 syntax on
 
 colorscheme jellybeans
+
+let mapleader = "\<Space>"
 
 " Normal
 noremap j gj
@@ -135,6 +148,7 @@ noremap <Esc><Esc> :nohlsearch<CR><Esc>
 " Insert
 inoremap <C-e> <END>
 inoremap <C-a> <HOME>
+inoremap <C-d> <Del>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
@@ -153,33 +167,33 @@ autocmd BufWritePre * :%s/\s\+$//ge
 " 前回終了したカーソル行に移動
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
-" NERDTree {{{
+" NERDTree
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
-
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('py', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('rb', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-" }}}
 
 " NERDCommenter
 let g:NERDCreateDefaultMappings = 0
 let NERDSpaceDelims = 1
 nmap <Leader>/ <Plug>NERDCommenterToggle
 vmap <Leader>/ <Plug>NERDCommenterToggle
+
+" lightline.vim
+let g:lightline = {
+  \ 'colorscheme': 'wombat',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component': {
+  \   'readonly': '%{&filetype=="help"?"":&readonly?"readonly":""}',
+  \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+  \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+  \ },
+  \ 'component_visible_condition': {
+  \   'readonly': '(&filetype!="help"&& &readonly)',
+  \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+  \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+  \ },
+  \ }
 
 " neocomplete {{{
 let g:neocomplete#enable_at_startup               = 1
