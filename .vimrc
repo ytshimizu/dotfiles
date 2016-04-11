@@ -59,10 +59,11 @@ endif
 
 filetype plugin indent on
 
-".vimrcを開く: <Space>e.
-nnoremap <Space>e. :<C-u>edit $MYVIMRC<Enter>
-".vimrcを反映: <Space>s.
-nnoremap <Space>s. :<C-u>source $MYVIMRC<Enter>
+" 保存時に行末の空白を除去する
+autocmd BufWritePre * :%s/\s\+$//ge
+
+" 前回終了したカーソル行に移動
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
 "編集中のファイル名を表示
 set title
@@ -71,10 +72,12 @@ set display=uhex
 " タブが対応する空白の数
 set tabstop=2
 " 自動で挿入されるインデントのスペース幅
+set smarttab
 set shiftwidth=2
 " tab キーを押した時に挿入されるスペース量
 set softtabstop=0
 "オートインデント
+set autoindent
 set smartindent
 "大文字/小文字の区別なく検索する
 set ignorecase
@@ -84,8 +87,6 @@ set smartcase
 set wrapscan
 "自動再読み込み
 set autoread
-"新しい行のインデントを現在行と同じにする
-set autoindent
 "タブの代わりに空白文字を指定する
 set expandtab
 "変更中のファイルでも、保存しないで他のファイルを表示する
@@ -96,9 +97,6 @@ set incsearch
 set number
 "閉括弧が入力された時、対応する括弧を強調する
 set showmatch
-"新しい行を作った時に高度な自動インデントを行う
-set smarttab
-set autoindent
 " カーソルの位置表示を行う
 set ruler
 "ステータスライン
@@ -160,12 +158,6 @@ nnoremap ZZ <Nop>
 nnoremap ZQ <Nop>
 nnoremap Q gq
 nnoremap <C-h> :<C-u>h<Space>
-
-" 保存時に行末の空白を除去する
-autocmd BufWritePre * :%s/\s\+$//ge
-
-" 前回終了したカーソル行に移動
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
 " NERDTree
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
