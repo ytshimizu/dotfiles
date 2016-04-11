@@ -35,7 +35,6 @@ if dein#load_state(s:plugin_dir)
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('scrooloose/nerdtree')
   call dein#add('Townk/vim-autoclose')
-  call dein#add('tomtom/tcomment_vim')
   call dein#add('nathanaelkane/vim-indent-guides')
   call dein#add('LeafCage/yankround.vim')
   call dein#add('Lokaltog/vim-easymotion')
@@ -121,23 +120,38 @@ syntax on
 
 colorscheme jellybeans
 
-" Keymap
+" Normal
 noremap j gj
 noremap k gk
-noremap <S-h>   ^
-noremap <S-j>   }
-noremap <S-k>   {
-noremap <S-l>   $
-" 入力モードでのカーソル移動
+noremap <S-h> ^
+noremap <S-j> }
+noremap <S-k> {
+noremap <S-l> $
+" ;でコマンド入力
+noremap ; :
+noremap : ;
+"検索結果ハイライトをEsc二回押しで消す
+noremap <Esc><Esc> :nohlsearch<CR><Esc>
+" Insert
 inoremap <C-e> <END>
 inoremap <C-a> <HOME>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
-" ;でコマンド入力
-noremap ; :
-noremap : ;
+inoremap <C-u>  <C-g>u<C-u>
+inoremap <C-w>  <C-g>u<C-w>
+" Normal+Visual
+nnoremap ZZ <Nop>
+nnoremap ZQ <Nop>
+nnoremap Q gq
+nnoremap <C-h> :<C-u>h<Space>
+
+" 保存時に行末の空白を除去する
+autocmd BufWritePre * :%s/\s\+$//ge
+
+" 前回終了したカーソル行に移動
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
 " NERDTree {{{
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
@@ -160,6 +174,12 @@ call NERDTreeHighlightFile('rb', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 " }}}
+
+" NERDCommenter
+let g:NERDCreateDefaultMappings = 0
+let NERDSpaceDelims = 1
+nmap <Leader>/ <Plug>NERDCommenterToggle
+vmap <Leader>/ <Plug>NERDCommenterToggle
 
 " neocomplete {{{
 let g:neocomplete#enable_at_startup               = 1
