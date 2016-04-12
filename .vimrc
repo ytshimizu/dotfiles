@@ -42,7 +42,6 @@ if dein#load_state(s:plugin_dir)
   call dein#add('kchmck/vim-coffee-script')
   call dein#add('ConradIrwin/vim-bracketed-paste')
   call dein#add('itchyny/lightline.vim')
-  call dein#add('itchyny/landscape.vim')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-endwise', {
@@ -168,24 +167,41 @@ let NERDSpaceDelims = 1
 nmap <Leader>/ <Plug>NERDCommenterToggle
 vmap <Leader>/ <Plug>NERDCommenterToggle
 
-" lightline.vim
+" lightline.vim {{{
 let g:lightline = {
   \ 'colorscheme': 'wombat',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
   \ },
-  \ 'component': {
-  \   'readonly': '%{&filetype=="help"?"":&readonly?"readonly":""}',
-  \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-  \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+  \ 'component_function': {
+  \   'fugitive': 'MyFugitive',
+  \   'readonly': 'MyReadonly',
+  \   'modified': 'MyModified'
   \ },
-  \ 'component_visible_condition': {
-  \   'readonly': '(&filetype!="help"&& &readonly)',
-  \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-  \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-  \ },
+  \ 'separator': { 'left': '⮀', 'right': '⮂' },
+  \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
   \ }
+
+function! MyModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+endfunction
+
+function! MyFugitive()
+  try
+    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+      let _ = fugitive#head()
+      return strlen(_) ? '⭠ '._ : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+" }}}
 
 " neocomplete {{{
 let g:neocomplete#enable_at_startup               = 1
