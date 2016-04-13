@@ -1,56 +1,53 @@
-" augroup PluginInstall
-"   autocmd!
-"   autocmd VimEnter * if dein#check_install() | call dein#install() | endif
-" augroup END
-
-let s:plugin_dir = expand('~/.vim/dein/')
-let s:dein_dir = s:plugin_dir . 'repos/github.com/Shougo/dein.vim'
-execute 'set runtimepath+=' . s:dein_dir
-
-if dein#load_state(s:plugin_dir)
-  call dein#begin(s:plugin_dir)
-
-  call dein#add('Shougo/dein.vim')
-  call dein#add('Shougo/vimproc.vim', {
-        \ 'build': {
-        \     'mac': 'make -f make_mac.mak',
-        \     'linux': 'make',
-        \     'unix': 'gmake',
-        \    },
-        \ })
-  call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/neomru.vim', {
-    \ 'depends' : 'Shougo/unite.vim'
-    \ })
-  if has('lua')
-    call dein#add('Shougo/neocomplete.vim', {
-      \ 'depends' : 'Shougo/vimproc',
-      \ 'autoload' : { 'insert' : 1,}
-      \ })
-  endif
-  call dein#add('scrooloose/nerdcommenter')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('Townk/vim-autoclose')
-  call dein#add('nathanaelkane/vim-indent-guides')
-  call dein#add('LeafCage/yankround.vim')
-  call dein#add('Lokaltog/vim-easymotion')
-  call dein#add('nanotech/jellybeans.vim')
-  call dein#add('kchmck/vim-coffee-script')
-  call dein#add('ConradIrwin/vim-bracketed-paste')
-  call dein#add('itchyny/lightline.vim')
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('editorconfig/editorconfig-vim')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('tpope/vim-endwise', {
-    \ 'autoload' : { 'insert' : 1,}})
-  call dein#add('junegunn/vim-easy-align', {
-    \ 'autoload': {
-    \   'commands' : ['EasyAlign'],
-    \   'mappings' : ['<Plug>(EasyAlign)'],
-    \ }})
-
-  call dein#end()
-  call dein#save_state()
+if has('vim_starting')
+  set nocompatible
+  set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 endif
 
+call dein#begin(expand('~/.vim/dein'))
+
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/vimproc.vim', {
+      \ 'build': {
+      \     'mac': 'make -f make_mac.mak',
+      \     'linux': 'make',
+      \     'unix': 'gmake',
+      \    },
+      \ })
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/neomru.vim', {
+  \ 'depends' : 'Shougo/unite.vim'
+  \ })
+if has('lua')
+  call dein#add('Shougo/neocomplete.vim', {
+    \ 'depends' : 'Shougo/vimproc',
+    \ 'autoload' : { 'insert' : 1,}
+    \ })
+endif
+call dein#add('scrooloose/nerdcommenter')
+call dein#add('scrooloose/nerdtree')
+call dein#add('Townk/vim-autoclose')
+call dein#add('nathanaelkane/vim-indent-guides')
+call dein#add('LeafCage/yankround.vim')
+call dein#add('Lokaltog/vim-easymotion')
+call dein#add('kchmck/vim-coffee-script')
+call dein#add('ConradIrwin/vim-bracketed-paste')
+call dein#add('itchyny/lightline.vim')
+call dein#add('airblade/vim-gitgutter')
+call dein#add('editorconfig/editorconfig-vim')
+call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-endwise', {
+  \ 'autoload' : { 'insert' : 1,}})
+call dein#add('junegunn/vim-easy-align', {
+  \ 'autoload': {
+  \   'commands' : ['EasyAlign'],
+  \   'mappings' : ['<Plug>(EasyAlign)'],
+  \ }})
+call dein#add('w0ng/vim-hybrid')
+
+call dein#end()
+
 filetype plugin indent on
+
+"if dein#check_install()
+"  call dein#install()
+"endif
