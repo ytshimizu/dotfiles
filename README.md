@@ -8,6 +8,8 @@
 * .tmux.conf
 * .vimrc
 * .zshrc
+* .gemrc
+* .editorconfig
 
 ## install
 bash setup.sh
