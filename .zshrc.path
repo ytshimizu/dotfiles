@@ -7,6 +7,9 @@ export PATH="$HOME/.gem/ruby/2.0.0/bin:$PATH"
 export PATH=$PATH:/Applications/MAMP/bin/php/php5.6.10/bin
 # Node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+if [ -d ${HOME}/node_modules/.bin ]; then
+  export PATH=${PATH}:${HOME}/node_modules/.bin
+fi
 # Go
 export GOPATH=$HOME/go/third-party:$HOME/go/project
 export PATH=$HOME/go/third-party/bin:$HOME/go/project/bin:$PATH
@@ -18,5 +21,3 @@ export PGDATA=/usr/local/var/postgres
 export CS_HOME=$HOME/cloud-search-tools
 export PATH=$PATH:$CS_HOME/bin
 export CS_ENDPOINT=cloudsearch.ap-northeast-1.amazonaws.com
-# nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
