@@ -43,6 +43,7 @@ if dein#load_state(s:plugin_dir)
   call dein#add('ConradIrwin/vim-bracketed-paste')
   call dein#add('itchyny/lightline.vim')
   call dein#add('airblade/vim-gitgutter')
+  call dein#add('editorconfig/editorconfig-vim')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-endwise', {
     \ 'autoload' : { 'insert' : 1,}})
