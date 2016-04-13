@@ -1,7 +1,3 @@
-if &compatible
-  set nocompatible
-endif
-
 " 保存時に行末の空白を除去する
 autocmd BufWritePre * :%s/\s\+$//ge
 
