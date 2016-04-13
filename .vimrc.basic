@@ -1,0 +1,71 @@
+if &compatible
+  set nocompatible
+endif
+
+" 保存時に行末の空白を除去する
+autocmd BufWritePre * :%s/\s\+$//ge
+
+" 前回終了したカーソル行に移動
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+
+"編集中のファイル名を表示
+set title
+"バイナリファイルの非印字可能文字を16進数で表示
+set display=uhex
+" タブが対応する空白の数
+set tabstop=2
+" 自動で挿入されるインデントのスペース幅
+set smarttab
+set shiftwidth=2
+" tab キーを押した時に挿入されるスペース量
+set softtabstop=0
+"オートインデント
+set autoindent
+set smartindent
+"大文字/小文字の区別なく検索する
+set ignorecase
+"検索文字列に大文字が含まれている場合は区別して検索する
+set smartcase
+"検索時に最後まで行ったら最初に戻る
+set wrapscan
+"自動再読み込み
+set autoread
+"タブの代わりに空白文字を指定する
+set expandtab
+"変更中のファイルでも、保存しないで他のファイルを表示する
+set hidden
+"インクリメンタルサーチを行う
+set incsearch
+"行番号を表示する
+set number
+"閉括弧が入力された時、対応する括弧を強調する
+set showmatch
+" カーソルの位置表示を行う
+set ruler
+"ステータスライン
+set laststatus=2
+" set statusline=%<%f\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%4v\ %l/%L
+" 入力中のコマンドをステータスに表示する
+set showcmd
+" 検索結果ch
+" 全モードでマウスを有効化
+set mouse=a
+" バックアップをとらない
+set nobackup
+" スワップファイルを作成しない
+set noswapfile
+" 行を強調表示
+set cursorline
+" コマンドを補完
+set wildmenu
+"TAB,EOFなどを可視化する
+set list
+set listchars=tab:>-,trail:-,extends:>,precedes:<
+"カーソルを行頭、行末で止まらないようにする
+set whichwrap=b,s,h,l,[,],<,>
+"バックスペースにてインデントを削除
+set backspace=indent,eol,start
+"クリップボードをOSと共有する
+set clipboard=unnamed,autoselect
+
+let mapleader = "\<Space>"
