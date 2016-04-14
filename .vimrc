@@ -1,5 +1,5 @@
 " dein.vim
-source ~/dotfiles/.vimrc.bundle
+source ~/dotfiles/.vimrc.dein
 " Basic
 source ~/dotfiles/.vimrc.basic
 " Colorscheme
