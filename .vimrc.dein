@@ -34,6 +34,8 @@ call dein#add('editorconfig/editorconfig-vim')
 call dein#add('posva/vim-vue')
 call dein#add('wavded/vim-stylus')
 call dein#add('slim-template/vim-slim')
+call dein#add('AndrewRadev/switch.vim')
+call dein#add('tpope/vim-rails')
 call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-endwise', {
   \ 'autoload' : { 'insert' : 1,}})
