@@ -1,10 +1,10 @@
 #!/bin/bash
 
-DOT_FILES=( .atom .gitconfig .gitignore .pryrc .gemrc .tmux.conf .vimrc .zshrc .editorconfig )
+DOT_FILES=( .atom .vim .gitconfig .gitignore .pryrc .gemrc .tmux.conf .vimrc .zshrc .editorconfig )
 
 for file in ${DOT_FILES[@]}
 do
-    ln -sn $HOME/dotfiles/$file $HOME/$file
+    ln -sfn $HOME/dotfiles/$file $HOME/$file
 done
 
 # install oh-my-zsh
