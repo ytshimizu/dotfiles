@@ -112,3 +112,6 @@ nnoremap <silent> [previm]r :call previm#refresh()<CR>
 " vimshell
 nmap <silent> vs :<C-u>VimShell<CR>
 nmap <silent> vp :<C-u>VimShellPop<CR>
+
+" plantuml
+let g:plantuml_executable_script = '~/dotfiles/plantuml'
