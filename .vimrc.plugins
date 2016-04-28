@@ -115,3 +115,10 @@ nmap <silent> vp :<C-u>VimShellPop<CR>
 
 " plantuml
 let g:plantuml_executable_script = '~/dotfiles/plantuml'
+function! _MakeFile()
+  exe ":make"
+endfunction
+command! MakeFile call _MakeFile()
+autocmd BufWrite *.{uml} :MakeFile
+autocmd BufWrite *.{pu} :MakeFile
+autocmd BufWrite *.{plantuml} :MakeFile
