@@ -12,6 +12,9 @@ export GOPATH=$HOME/go/third-party:$HOME/go/project
 export PATH=$HOME/go/third-party/bin:$HOME/go/project/bin:$PATH
 # Java
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+# Python
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
 # postgres
 export PGDATA=/usr/local/var/postgres
 # CS CLI
