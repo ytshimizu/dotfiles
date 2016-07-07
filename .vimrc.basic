@@ -65,3 +65,4 @@ set backspace=indent,eol,start
 set clipboard=unnamed,autoselect
 
 let mapleader = "\<Space>"
+let python_highlight_all = 1
