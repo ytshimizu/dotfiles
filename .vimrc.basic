@@ -67,7 +67,3 @@ set clipboard=unnamed,autoselect
 let python_highlight_all = 1
 let mapleader = "\<Space>"
 
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-
