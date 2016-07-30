@@ -1,5 +1,9 @@
 " NERDTree
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
+" ファイルが指定されていなければNERD treeを有効にする
+if argc() == 0
+  let g:nerdtree_tabs_open_on_console_startup = 1
+end
 
 " NERDCommenter
 let g:NERDCreateDefaultMappings = 0
@@ -7,40 +11,15 @@ let NERDSpaceDelims = 1
 nmap <Leader>/ <Plug>NERDCommenterToggle
 vmap <Leader>/ <Plug>NERDCommenterToggle
 
-" lightline.vim
-let g:lightline = {
-  \ 'colorscheme': 'jellybeans',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-  \   'fugitive': 'MyFugitive',
-  \   'readonly': 'MyReadonly',
-  \   'modified': 'MyModified'
-  \ },
-  \ 'separator': { 'left': '⮀', 'right': '⮂' },
-  \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-  \ }
-
-function! MyModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! MyReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
-endfunction
-
-function! MyFugitive()
-  try
-    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-      let _ = fugitive#head()
-      return strlen(_) ? '⭠ '._ : ''
-    endif
-  catch
-  endtry
-  return ''
-endfunction
+" vim-airline
+" Powerline系フォントを利用する
+let g:airline_powerline_fonts = 1
+" タブバーのカスタマイズを有効にする
+let g:airline#extensions#tabline#enabled = 1
+" タブバーの右領域を非表示にする
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_close_button = 0
 
 " neocomplete
 let g:neocomplete#enable_at_startup               = 1
@@ -122,3 +101,4 @@ command! MakeFile call _MakeFile()
 autocmd BufWrite *.{uml} :MakeFile
 autocmd BufWrite *.{pu} :MakeFile
 autocmd BufWrite *.{plantuml} :MakeFile
+
