@@ -18,6 +18,10 @@ eval "$(pyenv init -)"
 # postgres
 export PGDATA=/usr/local/var/postgres
 # CS CLI
-export CS_HOME=$HOME/cloud-search-tools
+export CS_HOME=$HOME/bin/cloud-search-tools
 export PATH=$PATH:$CS_HOME/bin
 export CS_ENDPOINT=cloudsearch.ap-northeast-1.amazonaws.com
+# Oracle CLI
+export ORACLE_HOME=$HOME/bin/sqlplus/instantclient_12_1
+export PATH=$ORACLE_HOME:$PATH
+export DYLD_LIBRARY_PATH=$HOME/bin/sqlplus/instantclient_12_1
