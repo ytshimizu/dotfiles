@@ -3,7 +3,7 @@ export PATH="$HOME/.rbenv/shims:/usr/local/bin:/usr/local/bin:/usr/local/bin:/us
 export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.gem/ruby/2.0.0/bin:$PATH"
-# PHP
+# PHPkk
 export PATH=$PATH:/Applications/MAMP/bin/php/php5.6.10/bin
 # Node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
@@ -23,7 +23,9 @@ export CS_HOME=$HOME/bin/cloud-search-tools
 export PATH=$PATH:$CS_HOME/bin
 export CS_ENDPOINT=cloudsearch.ap-northeast-1.amazonaws.com
 # Oracle CLI
-export ORACLE_HOME=$HOME/bin/sqlplus/instantclient_12_1
+export ORACLE_HOME=~/bin/sqlplus/instantclient_12_1
 export PATH=$ORACLE_HOME:$PATH
-export DYLD_LIBRARY_PATH=$HOME/bin/sqlplus/instantclient_12_1
-
+export LD_LIBRARY_PATH=~/bin/sqlplus/instantclient_12_1:$LD_LIBRARY_PATH
+export NLS_LANG=Japanese_Japan.AL32UTF8
+# Editor
+export EDITOR=/usr/local/bin/vim
