@@ -102,3 +102,4 @@ autocmd BufWrite *.{uml} :MakeFile
 autocmd BufWrite *.{pu} :MakeFile
 autocmd BufWrite *.{plantuml} :MakeFile
 
+autocmd BufRead,BufNewFile *.slim setfiletype slim
