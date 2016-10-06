@@ -9,8 +9,7 @@ export PATH=$PATH:/Applications/MAMP/bin/php/php5.6.10/bin
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH=$PATH:./node_modules/.bin
 # Go
-export GOPATH=$HOME/go/third-party:$HOME/go/project
-export PATH=$HOME/go/third-party/bin:$HOME/go/project/bin:$PATH
+export GOPATH=$HOME/.go
 # Java
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 # Python
@@ -26,6 +25,7 @@ export CS_ENDPOINT=cloudsearch.ap-northeast-1.amazonaws.com
 export ORACLE_HOME=~/bin/sqlplus/instantclient_12_1
 export PATH=$ORACLE_HOME:$PATH
 export LD_LIBRARY_PATH=~/bin/sqlplus/instantclient_12_1:$LD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=~/bin/sqlplus/instantclient_12_1:$LD_LIBRARY_PATH
 export NLS_LANG=Japanese_Japan.AL32UTF8
 # Editor
 export EDITOR=/usr/local/bin/vim
