@@ -8,9 +8,10 @@
   excludesfile = ~/.gitignore
   editor = /usr/local/bin/vim
 	quotepath = false
+	attributesfile = ~/.gitattributes
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -81,3 +82,6 @@
   dm = diff master
   dw = diff --color-words
   dc = diff --cached
+[diff "xlsx"]
+  binary = true
+  textconv = $GOPATH/bin/git-xlsx-textconv
