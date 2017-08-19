@@ -39,6 +39,7 @@ call dein#add('mattn/emmet-vim')
 call dein#add('kannokanno/previm')
 call dein#add('rhysd/vim-gfm-syntax')
 call dein#add('hdima/python-syntax')
+call dein#add('leafgarland/typescript-vim')
 call dein#add('tpope/vim-markdown')
 call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-rails')
@@ -52,6 +53,7 @@ call dein#add('junegunn/vim-easy-align', {
   \ }})
 call dein#add('w0ng/vim-hybrid')
 call dein#add('nanotech/jellybeans.vim')
+call dein#add('elzr/vim-json')
 
 call dein#end()
 

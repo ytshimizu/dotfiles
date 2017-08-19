@@ -1,0 +1,959 @@
+# ************************************************************
+# Sequel Pro SQL dump
+# バージョン 4541
+#
+# http://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
+#
+# ホスト: gamefyt.c4nwslgtjtyq.ap-northeast-1.rds.amazonaws.com (MySQL 5.6.27-log)
+# データベース: ajis_game_app_stg_p2
+# 作成時刻: 2017-06-26 04:24:25 +0000
+# ************************************************************
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# テーブルのダンプ achievements
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `achievements`;
+
+CREATE TABLE `achievements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rank_master_id` int(11) DEFAULT NULL,
+  `roster` varchar(7) NOT NULL,
+  `company_code` varchar(5) NOT NULL,
+  `store_code` varchar(5) NOT NULL,
+  `pieces` int(11) DEFAULT NULL,
+  `items` int(11) DEFAULT NULL,
+  `piece_per_hour` int(11) DEFAULT NULL,
+  `count_per_hour` int(11) DEFAULT NULL,
+  `miss_piece` int(11) DEFAULT NULL,
+  `miss_count` int(11) DEFAULT NULL,
+  `inventory_date` date NOT NULL,
+  `piece_miss_rate` float DEFAULT NULL,
+  `count_miss_rate` float DEFAULT NULL,
+  `store_name` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `store_in` datetime DEFAULT NULL,
+  `jb_point` int(11) DEFAULT NULL,
+  `check_piece` int(11) DEFAULT NULL,
+  `check_count` int(11) DEFAULT NULL,
+  `count_interim_time` float DEFAULT NULL,
+  `count_time` float DEFAULT NULL,
+  `duty` varchar(3) DEFAULT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `location_miss_count` int(11) DEFAULT NULL,
+  `location_total_count` int(11) DEFAULT NULL,
+  `sampling_miss_count` int(11) DEFAULT NULL,
+  `sampling_total_count` int(11) DEFAULT NULL,
+  `district_office_legacy_code` varchar(2) DEFAULT NULL,
+  `store_man_hour` float DEFAULT NULL,
+  `edit_piece` int(11) DEFAULT NULL,
+  `edit_count` int(11) DEFAULT NULL,
+  `total_piece` int(11) DEFAULT NULL,
+  `total_count` int(11) DEFAULT NULL,
+  `count_method` int(11) DEFAULT NULL,
+  `business_category` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_achievements_on_empnum_and_date_and_compcd_and_stcd` (`roster`,`inventory_date`,`company_code`,`store_code`),
+  KEY `index_achievements_on_rank_master_id` (`rank_master_id`),
+  KEY `index_achievements_on_roster` (`roster`),
+  CONSTRAINT `fk_rails_985d051eab` FOREIGN KEY (`rank_master_id`) REFERENCES `rank_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ admin_users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `admin_users`;
+
+CREATE TABLE `admin_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL DEFAULT '',
+  `encrypted_password` varchar(255) NOT NULL DEFAULT '',
+  `remember_created_at` datetime DEFAULT NULL,
+  `sign_in_count` int(11) NOT NULL DEFAULT '0',
+  `current_sign_in_at` datetime DEFAULT NULL,
+  `last_sign_in_at` datetime DEFAULT NULL,
+  `current_sign_in_ip` varchar(255) DEFAULT NULL,
+  `last_sign_in_ip` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `failed_attempts` int(11) NOT NULL DEFAULT '0',
+  `unlock_token` varchar(255) DEFAULT NULL,
+  `locked_at` datetime DEFAULT NULL,
+  `district_office_code` varchar(8) DEFAULT NULL,
+  `already_password_changed` tinyint(1) NOT NULL DEFAULT '0',
+  `name` varchar(255) DEFAULT NULL,
+  `role` int(11) NOT NULL DEFAULT '1',
+  `zone_code` varchar(8) DEFAULT NULL,
+  `roster` varchar(7) DEFAULT NULL,
+  `manual` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_admin_users_on_email` (`email`),
+  UNIQUE KEY `index_admin_users_on_unlock_token` (`unlock_token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ announcements
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `announcements`;
+
+CREATE TABLE `announcements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `body` varchar(1000) DEFAULT NULL,
+  `published_at` date DEFAULT NULL,
+  `draft` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_user_roster` varchar(7) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ ar_internal_metadata
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `ar_internal_metadata`;
+
+CREATE TABLE `ar_internal_metadata` (
+  `key` varchar(255) NOT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ class_master
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `class_master`;
+
+CREATE TABLE `class_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `jb_point` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `point_category` varchar(45) NOT NULL,
+  `grade` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `bonus_jb_point` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ company_master
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `company_master`;
+
+CREATE TABLE `company_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(5) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `name_kana` varchar(255) DEFAULT NULL,
+  `search_string` varchar(255) DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_company_master_on_code` (`code`),
+  KEY `index_company_master_on_deleted_at` (`deleted_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ contest_district_offices
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `contest_district_offices`;
+
+CREATE TABLE `contest_district_offices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contest_id` int(11) NOT NULL,
+  `district_office_code` varchar(8) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_contest_district_offices_on_contest_id` (`contest_id`),
+  CONSTRAINT `fk_rails_855d49bd16` FOREIGN KEY (`contest_id`) REFERENCES `contests` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ contest_exclusion_teams
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `contest_exclusion_teams`;
+
+CREATE TABLE `contest_exclusion_teams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `team_id` int(11) NOT NULL,
+  `contest_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_contest_exclusion_teams_on_contest_id_and_team_id` (`contest_id`,`team_id`),
+  KEY `index_contest_exclusion_teams_on_team_id` (`team_id`),
+  KEY `index_contest_exclusion_teams_on_contest_id` (`contest_id`),
+  CONSTRAINT `fk_rails_6a84d1e03a` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`),
+  CONSTRAINT `fk_rails_c2f2aeab66` FOREIGN KEY (`contest_id`) REFERENCES `contests` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ contest_exclusion_users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `contest_exclusion_users`;
+
+CREATE TABLE `contest_exclusion_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roster` varchar(7) NOT NULL,
+  `contest_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_contest_exclusion_users_on_contest_id_and_roster` (`contest_id`,`roster`),
+  KEY `index_contest_exclusion_users_on_contest_id` (`contest_id`),
+  KEY `fk_rails_437fbcb86b` (`roster`),
+  CONSTRAINT `fk_rails_2cfdcb6862` FOREIGN KEY (`contest_id`) REFERENCES `contests` (`id`),
+  CONSTRAINT `fk_rails_437fbcb86b` FOREIGN KEY (`roster`) REFERENCES `users` (`roster`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ contest_teams
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `contest_teams`;
+
+CREATE TABLE `contest_teams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contest_id` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  `priority` int(11) DEFAULT NULL,
+  `score` decimal(16,8) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_contest_teams_on_contest_id_and_team_id` (`contest_id`,`team_id`),
+  KEY `index_contest_teams_on_contest_id` (`contest_id`),
+  KEY `index_contest_teams_on_team_id` (`team_id`),
+  CONSTRAINT `fk_rails_13127ae907` FOREIGN KEY (`contest_id`) REFERENCES `contests` (`id`),
+  CONSTRAINT `fk_rails_ff25e39bb4` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ contest_user_teams
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `contest_user_teams`;
+
+CREATE TABLE `contest_user_teams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roster` varchar(7) NOT NULL,
+  `contest_team_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `priority` int(11) DEFAULT NULL,
+  `score` decimal(16,8) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_contest_user_teams_on_contest_team_id_and_roster` (`contest_team_id`,`roster`),
+  KEY `index_contest_user_teams_on_contest_team_id` (`contest_team_id`),
+  KEY `index_contest_user_teams_on_roster` (`roster`),
+  CONSTRAINT `fk_rails_b210ff3219` FOREIGN KEY (`contest_team_id`) REFERENCES `contest_teams` (`id`),
+  CONSTRAINT `fk_rails_d15ac05c9b` FOREIGN KEY (`roster`) REFERENCES `users` (`roster`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ contest_zones
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `contest_zones`;
+
+CREATE TABLE `contest_zones` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contest_id` int(11) NOT NULL,
+  `zone_code` varchar(8) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_contest_zones_on_contest_id` (`contest_id`),
+  CONSTRAINT `fk_rails_ee7d4086e1` FOREIGN KEY (`contest_id`) REFERENCES `contests` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ contests
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `contests`;
+
+CREATE TABLE `contests` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `body` varchar(1000) DEFAULT NULL,
+  `summary_key` int(11) NOT NULL,
+  `started_at` date NOT NULL,
+  `ended_at` date NOT NULL,
+  `duty` varchar(255) DEFAULT NULL,
+  `hire_started_at` date DEFAULT NULL,
+  `hire_ended_at` date DEFAULT NULL,
+  `company_code` varchar(5) DEFAULT NULL,
+  `max_miss_count` int(11) DEFAULT NULL,
+  `min_store_count` int(11) DEFAULT NULL,
+  `release` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `notification_started_at` date DEFAULT NULL,
+  `lock_version` int(11) NOT NULL DEFAULT '0',
+  `fixed` tinyint(1) NOT NULL DEFAULT '0',
+  `contest_category` int(11) NOT NULL DEFAULT '1',
+  `business_category` varchar(255) DEFAULT NULL,
+  `created_user_roster` varchar(7) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ crews
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `crews`;
+
+CREATE TABLE `crews` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roster` varchar(7) NOT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `store_name` varchar(255) DEFAULT NULL,
+  `company_code` varchar(5) NOT NULL,
+  `store_code` varchar(5) NOT NULL,
+  `inventory_date` date NOT NULL,
+  `duty` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `store_in` varchar(5) DEFAULT NULL,
+  `crew_code` varchar(13) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_crews_on_composite_unique_key` (`roster`,`company_code`,`store_code`,`inventory_date`,`crew_code`),
+  KEY `index_crews_on_crew_code` (`crew_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ district_office_master
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `district_office_master`;
+
+CREATE TABLE `district_office_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `zone_code` varchar(8) NOT NULL,
+  `code` varchar(8) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `legacy_code` varchar(2) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_district_office_master_on_code` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ inter_team_rankings
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `inter_team_rankings`;
+
+CREATE TABLE `inter_team_rankings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `team_id` int(11) NOT NULL,
+  `priority` int(11) DEFAULT NULL,
+  `jb_point` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_inter_team_rankings_on_team_id` (`team_id`),
+  CONSTRAINT `fk_rails_8cfb640572` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ inventory_histories
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `inventory_histories`;
+
+CREATE TABLE `inventory_histories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roster` varchar(7) NOT NULL,
+  `date` date NOT NULL,
+  `count_method` int(11) NOT NULL,
+  `re_rate` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `business_category` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_inventory_histories_on_composite_unique_key` (`roster`,`date`,`count_method`,`business_category`),
+  KEY `index_inventory_histories_on_roster` (`roster`),
+  CONSTRAINT `fk_rails_e2787c6ef4` FOREIGN KEY (`roster`) REFERENCES `users` (`roster`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ level_master
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `level_master`;
+
+CREATE TABLE `level_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `level` int(11) NOT NULL,
+  `days` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ manatee_stage_master
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `manatee_stage_master`;
+
+CREATE TABLE `manatee_stage_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `priority` int(11) NOT NULL DEFAULT '1',
+  `width` int(11) NOT NULL DEFAULT '1',
+  `height` int(11) NOT NULL DEFAULT '1',
+  `min` int(11) NOT NULL DEFAULT '1',
+  `max` int(11) NOT NULL DEFAULT '1',
+  `cluster` int(11) NOT NULL DEFAULT '1',
+  `limit` int(11) NOT NULL DEFAULT '1',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ manatee_statuses
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `manatee_statuses`;
+
+CREATE TABLE `manatee_statuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `play_count` int(11) NOT NULL DEFAULT '0',
+  `max_sv_level` int(11) NOT NULL DEFAULT '0',
+  `max_sv_score` int(11) NOT NULL DEFAULT '0',
+  `correct_answers` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `max_weekly_level` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `index_manatee_statuses_on_user_id` (`user_id`),
+  CONSTRAINT `fk_rails_5767c46a93` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ manatee_weekly_scores
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `manatee_weekly_scores`;
+
+CREATE TABLE `manatee_weekly_scores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manatee_status_id` int(11) DEFAULT NULL,
+  `play_date` date DEFAULT NULL,
+  `max_score` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `max_level` int(11) NOT NULL DEFAULT '1',
+  `play_count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `index_manatee_weekly_scores_on_manatee_status_id` (`manatee_status_id`),
+  KEY `index_manatee_weekly_scores_on_play_date` (`play_date`),
+  CONSTRAINT `fk_rails_c2c2c77323` FOREIGN KEY (`manatee_status_id`) REFERENCES `manatee_statuses` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ miss_rate_master
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `miss_rate_master`;
+
+CREATE TABLE `miss_rate_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rate` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ national_rankings
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `national_rankings`;
+
+CREATE TABLE `national_rankings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `priority` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_national_rankings_on_user_id` (`user_id`),
+  KEY `index_national_rankings_on_priority` (`priority`),
+  CONSTRAINT `fk_rails_ece15f199d` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ notices
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `notices`;
+
+CREATE TABLE `notices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `noticeable_type` varchar(45) NOT NULL,
+  `noticeable_id` int(11) NOT NULL,
+  `published_at` date DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_notices_on_noticeable_type_and_noticeable_id` (`noticeable_type`,`noticeable_id`),
+  KEY `index_notices_on_noticeable_id_and_noticeable_type` (`noticeable_id`,`noticeable_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ point_category_master
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `point_category_master`;
+
+CREATE TABLE `point_category_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `point_category` varchar(45) NOT NULL,
+  `rank_master_id` int(11) DEFAULT NULL,
+  `jb_point` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_point_category_master_on_rank_master_id` (`rank_master_id`),
+  CONSTRAINT `fk_rails_0b363d8246` FOREIGN KEY (`rank_master_id`) REFERENCES `rank_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ rank_master
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rank_master`;
+
+CREATE TABLE `rank_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `min_miss_rate_master_id` int(11) DEFAULT NULL,
+  `max_miss_rate_master_id` int(11) DEFAULT NULL,
+  `rank` varchar(8) NOT NULL,
+  `rate` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_rank_master_on_min_miss_rate_master_id` (`min_miss_rate_master_id`),
+  KEY `index_rank_master_on_max_miss_rate_master_id` (`max_miss_rate_master_id`),
+  CONSTRAINT `fk_rails_33bd10c206` FOREIGN KEY (`min_miss_rate_master_id`) REFERENCES `miss_rate_master` (`id`),
+  CONSTRAINT `fk_rails_d05459b47b` FOREIGN KEY (`max_miss_rate_master_id`) REFERENCES `miss_rate_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ schema_migrations
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `schema_migrations`;
+
+CREATE TABLE `schema_migrations` (
+  `version` varchar(255) NOT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ statuses
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `statuses`;
+
+CREATE TABLE `statuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `class_master_id` int(11) DEFAULT NULL,
+  `level_master_id` int(11) DEFAULT NULL,
+  `old_class_master_id` int(11) DEFAULT NULL,
+  `old_level_master_id` int(11) DEFAULT NULL,
+  `total_days` int(11) NOT NULL DEFAULT '0',
+  `total_jb_point` int(11) NOT NULL DEFAULT '0',
+  `last_inventory_date` date DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_statuses_on_user_id` (`user_id`),
+  KEY `index_statuses_on_class_master_id` (`class_master_id`),
+  KEY `index_statuses_on_level_master_id` (`level_master_id`),
+  KEY `index_statuses_on_old_class_master_id` (`old_class_master_id`),
+  KEY `index_statuses_on_old_level_master_id` (`old_level_master_id`),
+  CONSTRAINT `fk_rails_2e25271b28` FOREIGN KEY (`old_level_master_id`) REFERENCES `level_master` (`id`),
+  CONSTRAINT `fk_rails_360dade24f` FOREIGN KEY (`old_class_master_id`) REFERENCES `class_master` (`id`),
+  CONSTRAINT `fk_rails_8688014010` FOREIGN KEY (`class_master_id`) REFERENCES `class_master` (`id`),
+  CONSTRAINT `fk_rails_b29739edee` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_rails_b887758233` FOREIGN KEY (`level_master_id`) REFERENCES `level_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ sv_achievements
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sv_achievements`;
+
+CREATE TABLE `sv_achievements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roster` varchar(7) NOT NULL,
+  `planning_piece_per_hour` int(11) DEFAULT NULL,
+  `pieces` int(11) DEFAULT NULL,
+  `items` int(11) DEFAULT NULL,
+  `edit_piece` int(11) DEFAULT NULL,
+  `edit_count` int(11) DEFAULT NULL,
+  `inventory_date` date NOT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `store_name` varchar(255) DEFAULT NULL,
+  `company_code` varchar(5) NOT NULL,
+  `store_code` varchar(5) NOT NULL,
+  `total_piece` int(11) DEFAULT NULL,
+  `total_count` int(11) DEFAULT NULL,
+  `store_in` datetime DEFAULT NULL,
+  `duty` varchar(3) DEFAULT NULL,
+  `store_man_hour` float DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `business_category` int(11) DEFAULT NULL,
+  `sampling_miss_count` int(11) DEFAULT NULL,
+  `sampling_total_count` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_sv_achievements_on_empnum_and_date_and_compcd_and_stcd` (`roster`,`inventory_date`,`company_code`,`store_code`) USING BTREE,
+  KEY `index_sv_achievements_on_roster` (`roster`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ team_rankings
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `team_rankings`;
+
+CREATE TABLE `team_rankings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `team_id` int(11) NOT NULL,
+  `roster` varchar(7) NOT NULL,
+  `priority` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_team_rankings_on_team_id_and_roster` (`team_id`,`roster`),
+  KEY `index_team_rankings_on_team_id` (`team_id`),
+  KEY `index_team_rankings_on_roster` (`roster`),
+  CONSTRAINT `fk_rails_4f01a810e2` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`),
+  CONSTRAINT `fk_rails_bb00565235` FOREIGN KEY (`roster`) REFERENCES `users` (`roster`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ teams
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `teams`;
+
+CREATE TABLE `teams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `body` varchar(1000) DEFAULT NULL,
+  `district_office_code` varchar(8) DEFAULT NULL,
+  `zone_code` varchar(8) DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `color` varchar(255) DEFAULT NULL,
+  `lock_version` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `index_teams_on_deleted_at` (`deleted_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ trophies
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `trophies`;
+
+CREATE TABLE `trophies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `trophy_category` int(11) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `body` varchar(1000) DEFAULT NULL,
+  `condition` varchar(255) DEFAULT NULL,
+  `manually` tinyint(1) NOT NULL DEFAULT '0',
+  `execute_task_interval` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `no` int(11) NOT NULL,
+  `unacquired_disp_flg` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ trophy_messages
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `trophy_messages`;
+
+CREATE TABLE `trophy_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `body` varchar(255) NOT NULL,
+  `trophy_id` int(11) NOT NULL,
+  `lock_version` int(11) NOT NULL DEFAULT '0',
+  `district_office_code` varchar(8) DEFAULT NULL,
+  `zone_code` varchar(8) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `created_user_roster` varchar(7) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_rails_76082b8392` (`trophy_id`),
+  KEY `index_trophy_messages_on_deleted_at` (`deleted_at`),
+  CONSTRAINT `fk_rails_76082b8392` FOREIGN KEY (`trophy_id`) REFERENCES `trophies` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ user_announcements
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_announcements`;
+
+CREATE TABLE `user_announcements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roster` varchar(7) NOT NULL,
+  `announcement_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_user_announcements_on_roster_and_announcement_id` (`roster`,`announcement_id`),
+  KEY `fk_rails_2ee5e7f73c` (`announcement_id`),
+  KEY `index_user_announcements_on_roster` (`roster`),
+  CONSTRAINT `fk_rails_2ee5e7f73c` FOREIGN KEY (`announcement_id`) REFERENCES `announcements` (`id`),
+  CONSTRAINT `fk_rails_473b7ec945` FOREIGN KEY (`roster`) REFERENCES `users` (`roster`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ user_contests
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_contests`;
+
+CREATE TABLE `user_contests` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roster` varchar(7) NOT NULL,
+  `contest_id` int(11) NOT NULL,
+  `priority` int(11) DEFAULT NULL,
+  `score` decimal(16,8) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_user_contests_on_contest_id_and_roster` (`contest_id`,`roster`),
+  KEY `index_user_contests_on_contest_id` (`contest_id`),
+  KEY `fk_rails_a7c4dd6ed9` (`roster`),
+  CONSTRAINT `fk_rails_418fd0bbd0` FOREIGN KEY (`contest_id`) REFERENCES `contests` (`id`),
+  CONSTRAINT `fk_rails_a7c4dd6ed9` FOREIGN KEY (`roster`) REFERENCES `users` (`roster`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ user_notices
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_notices`;
+
+CREATE TABLE `user_notices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roster` varchar(7) NOT NULL,
+  `notice_id` int(11) NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_user_notices_on_roster_and_notice_id_and_deleted_at` (`roster`,`notice_id`,`deleted_at`),
+  KEY `index_user_notices_on_deleted_at` (`deleted_at`),
+  KEY `fk_rails_513fcc7cd2` (`notice_id`),
+  KEY `index_user_notices_on_roster` (`roster`),
+  CONSTRAINT `fk_rails_4ba4918a75` FOREIGN KEY (`roster`) REFERENCES `users` (`roster`),
+  CONSTRAINT `fk_rails_513fcc7cd2` FOREIGN KEY (`notice_id`) REFERENCES `notices` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ user_teams
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_teams`;
+
+CREATE TABLE `user_teams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roster` varchar(7) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_user_teams_on_team_id_and_roster` (`team_id`,`roster`),
+  KEY `index_user_teams_on_team_id` (`team_id`),
+  KEY `fk_rails_d26b678305` (`roster`),
+  CONSTRAINT `fk_rails_64c25f3fe6` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`),
+  CONSTRAINT `fk_rails_d26b678305` FOREIGN KEY (`roster`) REFERENCES `users` (`roster`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ user_trophies
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_trophies`;
+
+CREATE TABLE `user_trophies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `trophy_id` int(11) NOT NULL,
+  `obtain_count` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `roster` varchar(7) NOT NULL,
+  `obtain_date` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_user_trophies_on_trophy_id_and_roster` (`trophy_id`,`roster`),
+  KEY `index_user_trophies_on_trophy_id` (`trophy_id`),
+  KEY `fk_rails_46ff9f69f2` (`roster`),
+  CONSTRAINT `fk_rails_341d2dcc33` FOREIGN KEY (`trophy_id`) REFERENCES `trophies` (`id`),
+  CONSTRAINT `fk_rails_46ff9f69f2` FOREIGN KEY (`roster`) REFERENCES `users` (`roster`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ user_trophy_messages
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_trophy_messages`;
+
+CREATE TABLE `user_trophy_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `trophy_message_id` int(11) NOT NULL,
+  `roster` varchar(7) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_user_trophy_messages_on_trophy_message_id_and_roster` (`trophy_message_id`,`roster`),
+  KEY `fk_rails_99ce4f8e2c` (`roster`),
+  KEY `index_user_trophy_messages_on_deleted_at` (`deleted_at`),
+  CONSTRAINT `fk_rails_12fa2a9f9a` FOREIGN KEY (`trophy_message_id`) REFERENCES `trophy_messages` (`id`),
+  CONSTRAINT `fk_rails_99ce4f8e2c` FOREIGN KEY (`roster`) REFERENCES `users` (`roster`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `name_kana` varchar(255) DEFAULT NULL,
+  `roster` varchar(7) NOT NULL,
+  `thumbnail` varchar(45) DEFAULT NULL,
+  `zone_code` varchar(8) DEFAULT NULL,
+  `district_office_code` varchar(8) DEFAULT NULL,
+  `my_trophy_id` int(11) DEFAULT NULL,
+  `reported_flg` tinyint(1) NOT NULL DEFAULT '0',
+  `hire_date` date DEFAULT NULL,
+  `sv_license` tinyint(1) NOT NULL DEFAULT '0',
+  `sv_first_work_date` date DEFAULT NULL,
+  `tr_work_count` int(11) NOT NULL DEFAULT '0',
+  `operation_mode` int(11) NOT NULL DEFAULT '1',
+  `language` varchar(5) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_users_on_roster` (`roster`),
+  KEY `index_users_on_deleted_at` (`deleted_at`),
+  KEY `fk_rails_3705341096` (`my_trophy_id`),
+  CONSTRAINT `fk_rails_3705341096` FOREIGN KEY (`my_trophy_id`) REFERENCES `trophies` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# テーブルのダンプ zone_master
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `zone_master`;
+
+CREATE TABLE `zone_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(8) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `legacy_code` varchar(2) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_zone_master_on_code` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -103,3 +103,5 @@ autocmd BufWrite *.{pu} :MakeFile
 autocmd BufWrite *.{plantuml} :MakeFile
 
 autocmd BufRead,BufNewFile *.slim setfiletype slim
+
+let g:vim_json_syntax_conceal = 0
