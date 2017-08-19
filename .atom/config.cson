@@ -1,31 +1,9 @@
 "*":
-  "atom-beautify":
-    _analyticsUserId: "91b842f3-d84b-46c2-b503-60e30680c828"
-  core:
-    audioBeep: false
-    disabledPackages: [
-      "vim-mode-plus"
-    ]
-    themes: [
-      "atom-material-ui"
-      "atom-material-syntax-dark"
-    ]
-  editor:
-    fontSize: 15
-    invisibles: {}
-    showIndentGuide: true
-    showInvisibles: true
   "exception-reporting":
-    userId: "9ab92843-c95b-722d-94bb-29c36cb53f43"
+    userId: "a0bd5313-9b0e-470b-9651-ead222043b89"
   minimap:
     plugins:
-      bookmarks: true
       "git-diff": true
       "git-diffDecorationsZIndex": 0
       "highlight-selected": true
       "highlight-selectedDecorationsZIndex": 0
-  "save-session":
-    dataSaveFolder: "~/dotfiles/.atom/packages/save-session/projects"
-  "vim-mode-plus": {}
-  welcome:
-    showOnStartup: false
