@@ -28,5 +28,6 @@ export PATH=$ORACLE_HOME:$PATH
 export LD_LIBRARY_PATH=~/bin/sqlplus/instantclient_12_1:$LD_LIBRARY_PATH
 export DYLD_LIBRARY_PATH=~/bin/sqlplus/instantclient_12_1:$LD_LIBRARY_PATH
 export NLS_LANG=Japanese_Japan.AL32UTF8
+export OCI_DIR=~/bin/sqlplus/instantclient_12_1
 # Editor
 export EDITOR=/usr/local/bin/vim
