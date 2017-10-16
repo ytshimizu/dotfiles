@@ -1,9 +1,8 @@
 #
 # .gitconfig
 #
-[user]
-  name = shimizu
-  email = l.bird0206@gmail.com
+[include]
+  path = ~/.gitconfig.local
 [core]
   excludesfile = ~/.gitignore
   editor = /usr/local/bin/vim
