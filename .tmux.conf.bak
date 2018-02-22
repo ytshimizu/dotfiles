@@ -1,0 +1,48 @@
+set -g terminal-overrides 'xterm*:smcup@:rmcup@'
+
+# Automatically set window title
+set-window-option -g automatic-rename on
+set-option -g set-titles on
+
+set -g history-limit 1000000
+
+# set-window-option -g mode-keys vi
+
+# Mark/color active pane
+set -g pane-border-style fg=magenta
+set -g pane-active-border-style fg=magenta
+set -g pane-active-border-style bg=default
+
+# Pane slection
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Resizing panes
+bind-key C-h resize-pane -L 15
+bind-key C-j resize-pane -D 15
+bind-key C-k resize-pane -U 15
+bind-key C-l resize-pane -R 15
+
+# Copy & Paste
+setw -g mode-keys emacs
+bind-key -T copy-mode [ send -X begin-selection
+bind-key -T copy-mode M-w send -X copy-pipe "reattach-to-user-namespace pbcopy"
+unbind -T copy-mode Enter
+bind-key -T copy-mode Enter send -X copy-pipe "reattach-to-user-namespace pbcopy"
+
+# Reload tmux config
+bind-key a source-file ~/.tmux.conf
+
+# # move x clipboard into tmux paste buffer
+# bind C-w run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
+# # move tmux copy buffer into x clipboard
+# bind C-y run "tmux show-buffer | xclip -i"
+
+
+#new  -n tmux
+#selectw -t 1
+
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+run-shell /git/tmux-resurrect/resurrect.tmux
