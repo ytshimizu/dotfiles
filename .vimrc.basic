@@ -51,7 +51,7 @@ set nobackup
 " スワップファイルを作成しない
 set noswapfile
 " 行を強調表示
-set cursorline
+" set cursorline
 " コマンドを補完
 set wildmenu
 "TAB,EOFなどを可視化する
